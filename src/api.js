@@ -7,7 +7,7 @@ const headers = {
 }
 
 function getNews(title, pageSize = 12) {
-  return fetch(`http://newsapi.org/v2/everything?q=${title}&pageSize=${pageSize}&sortBy=publishedAt&apiKey=${key}`, headers)
+  return fetch(`https://newsapi.org/v2/everything?q=${title}&pageSize=${pageSize}&sortBy=publishedAt&apiKey=${key}`, headers)
     .then((response) => response.json())
     .catch(function(err){ 
       console.error('Failed retrieving information', err);
