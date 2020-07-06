@@ -15,19 +15,19 @@ function Home() {
       .then(articles => {
         console.log(articles)
         setNews({
-          world: articles[0]?.value?.articles,
-          economy: articles[1]?.value?.articles,
-          technology: articles[2]?.value?.articles
+          world: articles[0]?.value.value,
+          economy: articles[1]?.value.value,
+          technology: articles[2]?.value.value
         })
       })
   }, [])
 
   const renderPost = (post, index) => {
-    const { author, title } = post
+    const { author, description } = post
     return (
         <Col span={6} key={`post-${index}`}>
           <div>
-            <h3>{title}</h3>
+            <h3>{description}</h3>
             <span>Author {author}</span>
           </div>
         </Col>
