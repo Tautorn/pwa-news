@@ -1,13 +1,17 @@
-import React from 'react';
+import React from 'react'
 import Home from './containers/Home'
-import './App.css';
+import Header from './components/Header'
+import './App.css'
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
-  );
+    <main>
+      <Header />
+      <section>
+        <Home />
+      </section>
+    </main>
+  )
 }
 
-export default App;
+export default App

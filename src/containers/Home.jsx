@@ -1,6 +1,9 @@
 import React, { memo } from 'react'
 import { useEffect, useState } from 'react'
 import { Row, Col } from 'antd'
+import Economy from './components/Economy'
+import World from './components/World'
+import Technology from './components/Technology'
 import Api from '../api'
 
 function Home() {
@@ -8,9 +11,9 @@ function Home() {
 
   useEffect(() => {
     Promise.allSettled([
-      Api.getNews('world', 12),
+      Api.getNews('world', 8),
       Api.getNews('economy', 6),
-      Api.getNews('technology', 4)
+      Api.getNews('technology', 12)
     ])
       .then(articles => {
         console.log(articles)
@@ -22,31 +25,21 @@ function Home() {
       })
   }, [])
 
-  const renderPost = (post, index) => {
-    const { author, description } = post
-    return (
-        <Col span={6} key={`post-${index}`}>
-          <div>
-            <h3>{description}</h3>
-            <span>Author {author}</span>
-          </div>
-        </Col>
-    )
-  }
-
   return (
     <div>
       <Row gutter={[16, 16]}>
         <Col span={16}>
-          <Row gutter={[16, 16]}>
-            {news?.world?.map(renderPost)}
-          </Row>
+          <World values={news?.world} />
         </Col>
         <Col span={8}>
-
+          <Economy values={news?.economy} />
         </Col>
       </Row>
-      home
+      <Row gutter={[16, 16]}>
+        <Col span={24}>
+          <Technology values={news?.technology} />
+        </Col>
+      </Row>
     </div>
   )
 }
