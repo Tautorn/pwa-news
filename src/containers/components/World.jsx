@@ -8,15 +8,27 @@ function World({ values }) {
     return {__html: html}
   }
 
+  const renderImg = ({ image, description }) => (
+    <div>
+      <img src={image.url} alt={description} width="100%" />
+    </div>
+  )
+
   const renderPost = (post, index) => {
-    const { title, description } = post
+    const { title, image, description } = post
+    const isFirst = index === 0
+    const spanValue = isFirst ? 24 : 12
+
     return (
-      <Col span={6} key={`post-${index}`}>
+      <Col span={spanValue} key={`post-${index}`}>
         <article>
-          <p>
-            <strong dangerouslySetInnerHTML={createMarkup(title)} />
-          </p>
-          <p dangerouslySetInnerHTML={createMarkup(description)} />
+          <div>
+            <p>
+              <strong dangerouslySetInnerHTML={createMarkup(title)} />
+            </p>
+            <p dangerouslySetInnerHTML={createMarkup(description)} />
+            {isFirst && renderImg({ image, description })}
+          </div>
         </article>
       </Col>
     )

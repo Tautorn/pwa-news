@@ -1,9 +1,10 @@
 import React, { memo } from 'react'
+import './style.css'
 
 function Header() {
 
   return (
-    <header>
+    <header className="header">
       <h1>The PWA News</h1>
     </header>
   )

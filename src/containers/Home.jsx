@@ -11,8 +11,8 @@ function Home() {
 
   useEffect(() => {
     Promise.allSettled([
-      Api.getNews('world', 8),
-      Api.getNews('economy', 6),
+      Api.getNews('world', 3),
+      Api.getNews('economy', 8),
       Api.getNews('technology', 12)
     ])
       .then(articles => {
@@ -28,15 +28,19 @@ function Home() {
   return (
     <div>
       <Row gutter={[16, 16]}>
-        <Col span={16}>
+        <Col span={16} xs={24}>
+          <h2>World</h2>
           <World values={news?.world} />
         </Col>
-        <Col span={8}>
+        <Col span={8} xs={24}>
+          <h2>Economy</h2>
           <Economy values={news?.economy} />
         </Col>
       </Row>
+      <hr />
       <Row gutter={[16, 16]}>
         <Col span={24}>
+          <h2>Technology</h2>
           <Technology values={news?.technology} />
         </Col>
       </Row>

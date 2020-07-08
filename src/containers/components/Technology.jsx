@@ -8,15 +8,22 @@ function Technology({ values }) {
     return {__html: html}
   }
 
+  const renderImg = ({ image, description }) => (
+    <div>
+      <img src={image.url} alt={description} width="100%" />
+    </div>
+  )
+
   const renderPost = (post, index) => {
-    const { title, description } = post
+    const { title, image, description } = post
     return (
-      <Col span={6} key={`post-${index}`}>
+      <Col span={6} xs={12} key={`post-${index}`}>
         <article>
           <p>
             <strong dangerouslySetInnerHTML={createMarkup(title)} />
           </p>
           <p dangerouslySetInnerHTML={createMarkup(description)} />
+          {image.url && renderImg({ image, description })}
         </article>
       </Col>
     )
