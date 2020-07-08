@@ -1,13 +1,9 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'antd'
+import { createMarkup, openPost } from './utils'
 
 function World({ values }) {
-
-  function createMarkup(html) {
-    return {__html: html}
-  }
-
   const renderImg = ({ image, description }) => (
     <div>
       <img src={image.url} alt={description} width="100%" />
@@ -15,13 +11,13 @@ function World({ values }) {
   )
 
   const renderPost = (post, index) => {
-    const { title, image, description } = post
+    const { title, image, description, id } = post
     const isFirst = index === 0
     const spanValue = isFirst ? 24 : 12
 
     return (
       <Col span={spanValue} key={`post-${index}`}>
-        <article>
+        <article onClick={() => openPost(id)}>
           <div>
             <p>
               <strong dangerouslySetInnerHTML={createMarkup(title)} />

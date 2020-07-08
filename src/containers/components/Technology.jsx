@@ -1,12 +1,9 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'antd'
+import { createMarkup, openPost } from './utils'
 
 function Technology({ values }) {
-
-  function createMarkup(html) {
-    return {__html: html}
-  }
 
   const renderImg = ({ image, description }) => (
     <div>
@@ -15,10 +12,10 @@ function Technology({ values }) {
   )
 
   const renderPost = (post, index) => {
-    const { title, image, description } = post
+    const { title, image, description, id } = post
     return (
       <Col span={12} md={6} key={`post-${index}`}>
-        <article>
+        <article onClick={() => openPost(id)}>
           <p>
             <strong dangerouslySetInnerHTML={createMarkup(title)} />
           </p>
