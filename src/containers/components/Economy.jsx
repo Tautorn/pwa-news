@@ -15,7 +15,7 @@ function Economy({ values }) {
   const renderPost = (post, index) => {
     const { title, image, description } = post
     return (
-      <Col span={12} xs={24} key={`post-${index}`}>
+      <Col span={24} md={12} key={`post-${index}`}>
         <article>
           <p>
             <strong dangerouslySetInnerHTML={createMarkup(title)} />

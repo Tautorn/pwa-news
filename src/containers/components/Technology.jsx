@@ -17,7 +17,7 @@ function Technology({ values }) {
   const renderPost = (post, index) => {
     const { title, image, description } = post
     return (
-      <Col span={6} xs={12} key={`post-${index}`}>
+      <Col span={12} md={6} key={`post-${index}`}>
         <article>
           <p>
             <strong dangerouslySetInnerHTML={createMarkup(title)} />
