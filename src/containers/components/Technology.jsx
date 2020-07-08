@@ -1,15 +1,21 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'antd'
-import { createMarkup, openPost } from './utils'
+import { createMarkup } from '../../utils'
+import { useHistory } from "react-router-dom"
 
 function Technology({ values }) {
+  const history = useHistory()
 
   const renderImg = ({ image, description }) => (
     <div>
       <img src={image.url} alt={description} width="100%" />
     </div>
   )
+
+  const openPost = (id) => {
+    history.push(`/post/technology/${id}`)
+  }
 
   const renderPost = (post, index) => {
     const { title, image, description, id } = post

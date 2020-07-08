@@ -9,20 +9,21 @@ import Api from '../api'
 function Home() {
   const [news, setNews] = useState([])
 
+  const handleNews = (articles) => {
+    setNews({
+      world: articles[0]?.value.value,
+      economy: articles[1]?.value.value,
+      technology: articles[2]?.value.value
+    })
+  }
+
   useEffect(() => {
     Promise.allSettled([
       Api.getNews('world', 3),
       Api.getNews('economy', 8),
       Api.getNews('technology', 12)
     ])
-      .then(articles => {
-        console.log(articles)
-        setNews({
-          world: articles[0]?.value.value,
-          economy: articles[1]?.value.value,
-          technology: articles[2]?.value.value
-        })
-      })
+      .then(handleNews)
   }, [])
 
   return (

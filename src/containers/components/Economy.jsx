@@ -1,13 +1,19 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'antd'
-import { createMarkup, openPost } from './utils'
+import { createMarkup } from '../../utils'
+import { useHistory } from 'react-router-dom'
 
 function Economy({ values }) {
+  const history = useHistory()
 
   const renderImg = ({ image, description }) => <img src={image.url} alt={description} width="100%" />
 
-  const renderDescriptin = (description) => <p dangerouslySetInnerHTML={createMarkup(description)} />
+  const renderDescription = (description) => <p dangerouslySetInnerHTML={createMarkup(description)} />
+
+  const openPost = (id) => {
+    history.push(`/post/economy/${id}`)
+  }
 
   const renderPost = (post, index) => {
     const { title, image, description, id } = post
@@ -17,7 +23,7 @@ function Economy({ values }) {
           <p>
             <strong dangerouslySetInnerHTML={createMarkup(title)} />
           </p>
-         {image?.url ? renderImg({ image, description }) : renderDescriptin(description)}
+         {image?.url ? renderImg({ image, description }) : renderDescription(description)}
         </article>
       </Col>
     )
