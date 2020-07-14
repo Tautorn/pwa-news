@@ -4,12 +4,15 @@ import { Row, Col } from 'antd'
 import Economy from './components/Economy'
 import World from './components/World'
 import Technology from './components/Technology'
+import Loading from '../components/Loading'
 import Api from '../api'
 
 function Home() {
   const [news, setNews] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const handleNews = (articles) => {
+    setLoading(false)
     setNews({
       world: articles[0]?.value.value,
       economy: articles[1]?.value.value,
@@ -18,6 +21,7 @@ function Home() {
   }
 
   useEffect(() => {
+    setLoading(true)
     Promise.allSettled([
       Api.getNews('world', 3),
       Api.getNews('economy', 8),
@@ -25,6 +29,8 @@ function Home() {
     ])
       .then(handleNews)
   }, [])
+
+  if (loading) return <Loading />
 
   return (
     <div>
