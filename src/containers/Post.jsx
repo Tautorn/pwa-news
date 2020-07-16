@@ -1,10 +1,10 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useState, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { Row, Col } from 'antd'
 import Loading from '../components/Loading'
 import Api from '../api'
-import Share from './components/Share'
+import Actions from './components/Actions'
 import { createMarkup } from '../utils'
 import './style.css'
 
@@ -17,20 +17,22 @@ function Post() {
 
   const renderImg = ({ image, description }) => <img src={image.url} alt={description} width="75%" />
   
-  useEffect(() => {
-    const handleNews = (data) => {
-      setNews(data)
-      
-      const post = data?.value?.find(article => article.id === id)
-      setLoading(false)
-      setPost(post)
-    }
+  const handleNews = useCallback((data) => {
+    setNews(data[0]?.value)
+    setPost(data[1]?.value)
+    setLoading(false)
+  }, [])
 
+  useEffect(() => {
     setLoading(true)
-    
-    Api.getNews(subject, 12)
+
+    Promise.allSettled([
+      Api.getNews(subject),
+      Api.getNewsById(subject, id)
+    ])
       .then(handleNews)
-  }, [id, subject])
+
+  }, [id, subject, handleNews])
 
   const renderDescription = (description) => <p dangerouslySetInnerHTML={createMarkup(description)} />
 
@@ -60,7 +62,7 @@ function Post() {
 
   return (
     <>
-      <Share />
+      <Actions post={post} subject={subject} />
       <Row gutter={[16, 16]}>
         <Col span={24} md={16}>
           <p>{datePublished}</p>

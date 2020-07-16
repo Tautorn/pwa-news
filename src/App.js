@@ -17,7 +17,7 @@ function App() {
         <Router>
           <div>
             <Switch>
-              <Route path="/post/:subject/:id">
+              <Route path="/:subject/:id">
                 <Post />
               </Route>
               <Route path="/">

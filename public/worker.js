@@ -1,6 +1,9 @@
 var CACHE_NAME = 'pwa-news';
 var urlsToCache = [
-  '/'
+  '/',
+  '/index.html',
+  '/static/js/bundle.js'
+
 ];
 
 // Install a service worker
@@ -16,19 +19,25 @@ self.addEventListener('install', event => {
 });
 
 // Cache and return requests
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
-  );
-});
+// self.addEventListener('fetch', function(event) {
+//   event.respondWith(caches.match(event.request));
+// });
+
+// self.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//     caches.open(CACHE_NAME).then(function(cache) {
+//       console.log("its here", event.request)
+//       return cache.match(event.request).then(function (response) {
+//         console.log("response", response)
+//         console.log("event", event)
+//         return response || fetch(event.request).then(function(response) {
+//           cache.put(event.request, response.clone());
+//           return response;
+//         });
+//       });
+//     })
+//   );
+// });
 
 // Update a service worker
 self.addEventListener('activate', event => {
