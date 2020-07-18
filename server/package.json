@@ -5,8 +5,8 @@
   "main": "index.mjs",
   "type": "module",
   "scripts": {
-    "start": "node --experimental-json-modules index.mjs",
-    "dev": "nodemon --experimental-json-modules index.mjs",
+    "start": "node --experimental-json-modules build/index.mjs",
+    "dev": "nodemon --experimental-json-modules src/index.mjs",
     "build": "mkdir -p build && cp -R node_modules src/* build"
   },
   "author": "",
