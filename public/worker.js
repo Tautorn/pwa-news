@@ -1,9 +1,6 @@
 var CACHE_NAME = 'pwa-news';
 var urlsToCache = [
-  '/',
-  '/index.html',
-  '/static/js/bundle.js'
-
+  '/'
 ];
 
 // Install a service worker
@@ -19,8 +16,10 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', function(event) {
+  console.log("event", event)
   event.respondWith(
     caches.open(CACHE_NAME).then(function(cache) {
+      console.log("cache", cache)
       return cache.match(event.request).then(function (response) {
         console.log("response", response)
         return response || fetch(event.request).then(function(response) {
