@@ -16,21 +16,24 @@ self.addEventListener('install', event => {
   );
 });
 
-this.addEventListener('activate', function(event) {
-  var cacheWhitelist = ['v2'];
-
+// Update a service worker
+self.addEventListener('activate', event => {
+  var cacheWhitelist = ['pwa-task-manager'];
   event.waitUntil(
-    caches.keys().then(function(keyList) {
-      return Promise.all(keyList.map(function(key) {
-        if (cacheWhitelist.indexOf(key) === -1) {
-          return caches.delete(key);
-        }
-      }));
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
     })
   );
 });
 
 self.addEventListener('fetch', function(event) {
+  console.log("fetch", event)
   event.respondWith(
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.match(event.request).then(function (response) {
