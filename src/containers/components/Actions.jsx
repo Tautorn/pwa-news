@@ -4,7 +4,7 @@ import CopyIcon from '../../images/copy.svg'
 
 const navigatorHasShare = navigator.share
 
-const URL = 'https://covid19pwa.netlify.app/'
+const URL = 'https://pwa-wnews.netlify.app/'
 
 function Actions({ post, subject }) {
   const { id, title } = post
