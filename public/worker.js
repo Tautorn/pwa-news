@@ -17,7 +17,7 @@ self.addEventListener('install', event => {
 });
 
 this.addEventListener('activate', function(event) {
-  var cacheWhitelist = ['v2'];
+  var cacheWhitelist = [CACHE_NAME];
 
   event.waitUntil(
     caches.keys().then(function(keyList) {
@@ -30,14 +30,15 @@ this.addEventListener('activate', function(event) {
   );
 });
 
-this.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function(event) {
   event.respondWith(
-    caches.match(event.request).then(function(resp) {
-      return resp || fetch(event.request).then(function(response) {
-        return caches.open('v1').then(function(cache) {
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.match(event.request).then(function (response) {
+        console.log("response", response)
+        return response || fetch(event.request).then(function(response) {
           cache.put(event.request, response.clone());
           return response;
-        });  
+        });
       });
     })
   );
