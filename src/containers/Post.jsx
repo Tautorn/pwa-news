@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useState, useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams, Link } from 'react-router-dom'
 import { Row, Col } from 'antd'
 import Loading from '../components/Loading'
 import Api from '../api'
@@ -62,6 +61,7 @@ function Post() {
 
   return (
     <>
+      <Link to="/">Back</Link>
       <Actions post={post} subject={subject} />
       <Row gutter={[16, 16]}>
         <Col span={24} md={16}>
