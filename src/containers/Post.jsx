@@ -37,7 +37,7 @@ function Post() {
   const renderDescription = (description) => <p dangerouslySetInnerHTML={createMarkup(description)} />
 
   const openPost = (id) => {
-    history.push(`/post/${subject}/${id}`)
+    history.push(`/${subject}/${id}`)
   }
 
   const renderPost = (post, index) => {

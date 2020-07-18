@@ -1,8 +1,6 @@
 import React, { memo } from 'react'
 import ShareIcon from '../../images/share.svg'
 import CopyIcon from '../../images/copy.svg'
-import BookMarkIcon from '../../images/bookmark.svg'
-import Api from '../../api'
 
 const navigatorHasShare = navigator.share
 
@@ -32,28 +30,9 @@ function Actions({ post, subject }) {
     return <img alt="icon" src={icon} className="share-icon" onClick={action} />
   }
 
-  const savePost = (event) => {
-    event.preventDefault()
-    caches.open('mysite-article-' + id).then(function(cache) {
-      console.log("enter here", post)
-      // cache.addAll(post)
-      // cache.add('/post/world/3994548919426230329', '343434')
-      Object.keys(post).map((url) => {
-        return cache.add(url);
-      });
-    })
-  }
-
   return (
     <div className="share">
       {renderAction()}
-      <img
-        style={{ paddingLeft: '30px' }}
-        alt="icon"
-        src={BookMarkIcon}
-        className="share-icon"
-        onClick={savePost}
-      />
     </div>
   )
 }

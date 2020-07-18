@@ -18,26 +18,19 @@ self.addEventListener('install', event => {
   );
 });
 
-// Cache and return requests
-// self.addEventListener('fetch', function(event) {
-//   event.respondWith(caches.match(event.request));
-// });
-
-// self.addEventListener('fetch', function(event) {
-//   event.respondWith(
-//     caches.open(CACHE_NAME).then(function(cache) {
-//       console.log("its here", event.request)
-//       return cache.match(event.request).then(function (response) {
-//         console.log("response", response)
-//         console.log("event", event)
-//         return response || fetch(event.request).then(function(response) {
-//           cache.put(event.request, response.clone());
-//           return response;
-//         });
-//       });
-//     })
-//   );
-// });
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.match(event.request).then(function (response) {
+        console.log("response", response)
+        return response || fetch(event.request).then(function(response) {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      });
+    })
+  );
+});
 
 // Update a service worker
 self.addEventListener('activate', event => {
