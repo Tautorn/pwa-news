@@ -5,8 +5,9 @@
   "main": "index.mjs",
   "type": "module",
   "scripts": {
-    "start": "nodemon --experimental-json-modules index.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --experimental-json-modules index.mjs",
+    "dev": "nodemon --experimental-json-modules index.mjs",
+    "build": "mkdir -p build && cp -R node_modules src/* build"
   },
   "author": "",
   "license": "ISC",
